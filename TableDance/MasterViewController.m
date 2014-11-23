@@ -8,6 +8,7 @@
 
 #import "MasterViewController.h"
 #import "DetailViewController.h"
+#import "TableViewCell.h"
 
 @interface MasterViewController ()
 
@@ -27,6 +28,14 @@
 
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
+    
+    NSLog(@"%f", UITableViewAutomaticDimension);
+    NSLog(@"%f", self.tableView.rowHeight);
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -64,10 +73,11 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    TableViewCell *cell = (TableViewCell *) [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
 
     NSDate *object = self.objects[indexPath.row];
-    cell.textLabel.text = [object description];
+    cell.leftLabel.text = [object description];
+    cell.rightLabel.text = [object description];
     return cell;
 }
 

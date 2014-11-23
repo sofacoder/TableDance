@@ -15,6 +15,7 @@
 		E60417EB1A21EF5F00F5360F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E60417EA1A21EF5F00F5360F /* Images.xcassets */; };
 		E60417EE1A21EF5F00F5360F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E60417EC1A21EF5F00F5360F /* LaunchScreen.xib */; };
 		E60417FA1A21EF5F00F5360F /* TableDanceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E60417F91A21EF5F00F5360F /* TableDanceTests.m */; };
+		E63DC12E1A2276DE00B44D42 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E63DC12D1A2276DE00B44D42 /* TableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,8 @@
 		E60417F31A21EF5F00F5360F /* TableDanceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TableDanceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E60417F81A21EF5F00F5360F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E60417F91A21EF5F00F5360F /* TableDanceTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableDanceTests.m; sourceTree = "<group>"; };
+		E63DC12C1A2276DE00B44D42 /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
+		E63DC12D1A2276DE00B44D42 /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +93,8 @@
 				E60417E21A21EF5F00F5360F /* MasterViewController.m */,
 				E60417E41A21EF5F00F5360F /* DetailViewController.h */,
 				E60417E51A21EF5F00F5360F /* DetailViewController.m */,
+				E63DC12C1A2276DE00B44D42 /* TableViewCell.h */,
+				E63DC12D1A2276DE00B44D42 /* TableViewCell.m */,
 				E60417E71A21EF5F00F5360F /* Main.storyboard */,
 				E60417EA1A21EF5F00F5360F /* Images.xcassets */,
 				E60417EC1A21EF5F00F5360F /* LaunchScreen.xib */,
@@ -227,6 +232,7 @@
 				E60417E01A21EF5F00F5360F /* AppDelegate.m in Sources */,
 				E60417E31A21EF5F00F5360F /* MasterViewController.m in Sources */,
 				E60417DD1A21EF5F00F5360F /* main.m in Sources */,
+				E63DC12E1A2276DE00B44D42 /* TableViewCell.m in Sources */,
 				E60417E61A21EF5F00F5360F /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -418,6 +424,7 @@
 				E60417FF1A21EF5F00F5360F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E60418001A21EF5F00F5360F /* Build configuration list for PBXNativeTarget "TableDanceTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +433,7 @@
 				E60418021A21EF5F00F5360F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
