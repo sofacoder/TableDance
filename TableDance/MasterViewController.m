@@ -29,6 +29,18 @@
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
     
+    // Die estimatedRowHeight ist ein Richtwert, den der TableView nur fuer das berechnen des Scroll Bars verwendet. Wenn der nicht halbwegs passt, feangt der Bar
+    // an zu huepfen und veraendert ein wenig die Groesse. Kannste mal ausproboeren indem du hier mal 10.0 oder so angibst und dann ne ganze Menge Cells erzeugst.
+    // Das ist dann halt der Tradeoff, wenn man nicht will, dass fuer alle Cells schon das Layout gemacht wird, was einfach imperformat waere. Aber ohne Layout
+    // kann man auch nicht wissen wie hoch das ganze wird.
+    // Wir haben in einer unserer Apps estimatedHeightForRowAtIndexPath implementiert und schauen dort auf den Text des labels, dass am meisten Text hat. Mit einer Heuristik
+    // berechnen wir dann wir hoch die Zeile wird. Das wir dann aber mit den neune iPhone Breiten eher unschoener Code.
+    self.tableView.estimatedRowHeight = 44.0;
+    // iOS 8 kann das mit dem Berechnen nun allein, warum man das nicht im IB angeben kann, oder das gleich einfach so passiert weiss ich auch nicht (hab mich damit noch nicht
+    // naeher befasst).
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+
+    // Was ist das?
     NSLog(@"%f", UITableViewAutomaticDimension);
     NSLog(@"%f", self.tableView.rowHeight);
 }
