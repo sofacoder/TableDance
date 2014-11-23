@@ -1,0 +1,5 @@
+1.) Loesung fuer die Zellenhoehe siehe Kommentar in MasterViewController
+
+2.) Loesung fuer das Allignment des Title Labels:
+
+Wenn Text von dem du nicht weisst wie gross er wird, solltest du "Lines" auf 0 setzen. Dann macht er so viele Zeilen wie noetig. In deinem Beispiel sieht man dann mehr Text. Wenn du wirklich nur eine Zeile willst, die dann oben klebt, muss dem Label so constraints verpassen, dass es nicht durch andere Constraints vergroessert wird. Wie in "DebugView-LabelSizes.png" zu sehen, wird dein Title Label geanu so gross wie dein Morgen Label. Das lieg daran, dass du ja mit deinen Constraints sagst "Das Label soll 10 bzw. 12 Punkte nach oben und unten Abstand zum Super View haben." Der Super View wird groesser, weil das Morgan Label greosser wird. Wenn du beim Title Label 0 oder 2 Zeilen einstellst passt das. Wenn du wirklich nur eine Zeile willst, nimm Bottom-SuperView Constraint weg. (Die Loesung hab ich eingecheckt).

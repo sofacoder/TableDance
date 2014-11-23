@@ -75,10 +75,16 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TableViewCell *cell = (TableViewCell *) [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
 
-    NSDate *object = self.objects[indexPath.row];
-    cell.leftLabel.text = [object description];
-    cell.rightLabel.text = [object description];
+    [self configureCell:cell atIndexPath:indexPath];
+    
     return cell;
+}
+
+- (void) configureCell:(TableViewCell *) aCell atIndexPath:(NSIndexPath *) aIndexPath
+{
+    NSDate *object = self.objects[aIndexPath.row];
+    aCell.leftLabel.text = [object description];
+    aCell.rightLabel.text = [object description];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -93,6 +99,34 @@
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
     }
+}
+
+/**
+ * OK, du hast dir da natürlich gleich einen etwas speziellen Fall ausgedacht. Aus einem Grunde den ich nicht mehr kenne, 
+ berechnet der TableView die Größe der Zelle zu einem ungünstigen Zeitpunkt. Du muss ihm helfen und das Layout fuer ihn 
+ schon mal machen. Wie gesagt, es gab dafuer keine guten, aber soweit ich mich erinnere nachvollziehbare Gruende. Cool ist das nicht.
+ 
+ Mit iOS 7.0 kann das auch zu performance Problemen kommen, weil 7.0 das fuer alle Zellen (auch die nicht sichtbaren) macht. 
+ Sprich 7.0 ruft nicht estimatedHeightForRowAtIndexPath auf, selbst wenn man es implementiert hat. Mit 7.1 ist das aber gefixed.
+ 
+ */
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static TableViewCell *sizingCell = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sizingCell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    });
+    
+    [self configureCell:sizingCell atIndexPath:indexPath];
+    return [self calculateHeightForConfiguredSizingCell:sizingCell];
+}
+
+- (CGFloat)calculateHeightForConfiguredSizingCell:(UITableViewCell *)sizingCell {
+    [sizingCell setNeedsLayout];
+    [sizingCell layoutIfNeeded];
+    
+    CGSize size = [sizingCell.contentView systemLayoutSizeFittingSize:UILayoutFittingExpandedSize];
+    return size.height;
 }
 
 @end
