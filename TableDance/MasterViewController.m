@@ -31,8 +31,11 @@
     
     self.tableView.estimatedRowHeight = 44;
     
-    NSLog(@"%f", UITableViewAutomaticDimension);
-    NSLog(@"%f", self.tableView.rowHeight);
+    // ein paar Objekte erstellen, damit schön was angezeigt werden kann
+    self.objects = [[NSMutableArray alloc] init];
+    for (int i=0; i < 100; i++) {
+        [self.objects addObject:[NSDate dateWithTimeIntervalSinceNow:i*100000]];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
