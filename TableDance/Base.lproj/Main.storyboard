@@ -132,17 +132,26 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Th5-2g-Hrq">
+                                <rect key="frame" x="20" y="231" width="560" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Th5-2g-Hrq" firstAttribute="centerX" secondItem="Lei-5M-9Gs" secondAttribute="centerX" id="3P0-Gj-EvF"/>
                             <constraint firstItem="Lei-5M-9Gs" firstAttribute="leading" secondItem="MMQ-IT-qOo" secondAttribute="leading" constant="20" symbolic="YES" id="62x-JV-TTJ"/>
                             <constraint firstItem="Lei-5M-9Gs" firstAttribute="centerY" secondItem="MMQ-IT-qOo" secondAttribute="centerY" id="JzS-HC-Rnl"/>
                             <constraint firstAttribute="trailing" secondItem="Lei-5M-9Gs" secondAttribute="trailing" constant="20" symbolic="YES" id="pXB-RP-Zz6"/>
+                            <constraint firstItem="Lei-5M-9Gs" firstAttribute="top" secondItem="Th5-2g-Hrq" secondAttribute="bottom" constant="40" id="rpb-pc-SCO"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Detail" id="cra-N8-TIN"/>
                     <connections>
-                        <outlet property="detailDescriptionLabel" destination="Lei-5M-9Gs" id="sCT-F7-F6f"/>
+                        <outlet property="detailDateLabel" destination="Lei-5M-9Gs" id="TiU-SF-aWD"/>
+                        <outlet property="detailDescriptionLabel" destination="Th5-2g-Hrq" id="Mz6-mH-fNF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lrm-kH-fPn" sceneMemberID="firstResponder"/>

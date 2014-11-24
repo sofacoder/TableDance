@@ -9,6 +9,7 @@
 #import "MasterViewController.h"
 #import "DetailViewController.h"
 #import "TableViewCell.h"
+#import "DetailObject.h"
 
 @interface MasterViewController ()
 
@@ -39,7 +40,9 @@
     // ein paar Objekte erstellen, damit schön was angezeigt werden kann
     self.objects = [[NSMutableArray alloc] init];
     for (int i=0; i < 100; i++) {
-        [self.objects addObject:[NSDate dateWithTimeIntervalSinceNow:i*100000]];
+        [self.objects addObject:[[DetailObject alloc]
+                                 initWithTitle:[NSString stringWithFormat:@"Ereignis %i", i]
+                                 andDate:[NSDate dateWithTimeIntervalSinceNow:i*100000]]];
     }
 }
 
@@ -57,7 +60,8 @@
     if (!self.objects) {
         self.objects = [[NSMutableArray alloc] init];
     }
-    [self.objects insertObject:[NSDate date] atIndex:0];
+    DetailObject *object = [[DetailObject alloc] initWithTitle:@"Neues Ereignis" andDate:[NSDate date]];
+    [self.objects insertObject:object atIndex:0];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
@@ -67,7 +71,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSDate *object = self.objects[indexPath.row];
+        DetailObject *object = self.objects[indexPath.row];
         [[segue destinationViewController] setDetailItem:object];
     }
 }
@@ -92,9 +96,9 @@
 
 - (void) configureCell:(TableViewCell *) aCell atIndexPath:(NSIndexPath *) aIndexPath
 {
-    NSDate *object = self.objects[aIndexPath.row];
-    aCell.leftLabel.text = [object description];
-    aCell.rightLabel.text = [object description];
+    DetailObject *object = self.objects[aIndexPath.row];
+    aCell.leftLabel.text = [object.date description];
+    aCell.rightLabel.text = object.title;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

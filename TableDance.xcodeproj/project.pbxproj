@@ -16,6 +16,7 @@
 		E60417EE1A21EF5F00F5360F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E60417EC1A21EF5F00F5360F /* LaunchScreen.xib */; };
 		E60417FA1A21EF5F00F5360F /* TableDanceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E60417F91A21EF5F00F5360F /* TableDanceTests.m */; };
 		E63DC12E1A2276DE00B44D42 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E63DC12D1A2276DE00B44D42 /* TableViewCell.m */; };
+		E6E6A31D1A23626100F843C2 /* DetailObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E6A31C1A23626100F843C2 /* DetailObject.m */; };
 		FABCD11F1A228C3100C6E3A6 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = FABCD11E1A228C3100C6E3A6 /* README.txt */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +48,8 @@
 		E60417F91A21EF5F00F5360F /* TableDanceTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableDanceTests.m; sourceTree = "<group>"; };
 		E63DC12C1A2276DE00B44D42 /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
 		E63DC12D1A2276DE00B44D42 /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
+		E6E6A31C1A23626100F843C2 /* DetailObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailObject.m; sourceTree = "<group>"; };
+		E6E6A31E1A23626B00F843C2 /* DetailObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailObject.h; sourceTree = "<group>"; };
 		FABCD11E1A228C3100C6E3A6 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		FABCD1201A228DB700C6E3A6 /* DebugView-LabelSizes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DebugView-LabelSizes.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -92,6 +95,8 @@
 			children = (
 				E60417DE1A21EF5F00F5360F /* AppDelegate.h */,
 				E60417DF1A21EF5F00F5360F /* AppDelegate.m */,
+				E6E6A31E1A23626B00F843C2 /* DetailObject.h */,
+				E6E6A31C1A23626100F843C2 /* DetailObject.m */,
 				E60417E11A21EF5F00F5360F /* MasterViewController.h */,
 				E60417E21A21EF5F00F5360F /* MasterViewController.m */,
 				E60417E41A21EF5F00F5360F /* DetailViewController.h */,
@@ -240,6 +245,7 @@
 				E60417DD1A21EF5F00F5360F /* main.m in Sources */,
 				E63DC12E1A2276DE00B44D42 /* TableViewCell.m in Sources */,
 				E60417E61A21EF5F00F5360F /* DetailViewController.m in Sources */,
+				E6E6A31D1A23626100F843C2 /* DetailObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
