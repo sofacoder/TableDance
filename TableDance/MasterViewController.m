@@ -38,7 +38,8 @@
     self.tableView.estimatedRowHeight = 44.0;
     // iOS 8 kann das mit dem Berechnen nun allein, warum man das nicht im IB angeben kann, oder das gleich einfach so passiert weiss ich auch nicht (hab mich damit noch nicht
     // naeher befasst).
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    // passiert schon automatisch, wenn die Höhe im IB als 44 angegeben ist
+//    self.tableView.rowHeight = UITableViewAutomaticDimension;
 
     // Was ist das?
     NSLog(@"%f", UITableViewAutomaticDimension);
