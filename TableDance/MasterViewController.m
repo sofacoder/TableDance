@@ -11,9 +11,10 @@
 #import "TableViewCell.h"
 #import "DetailObject.h"
 
-@interface MasterViewController ()
+@interface MasterViewController () <UISearchBarDelegate, UISearchDisplayDelegate>
 
 @property NSMutableArray *objects;
+@property NSMutableArray *filteredObjects;
 @end
 
 @implementation MasterViewController
@@ -36,10 +37,13 @@
         self.tableView.estimatedRowHeight = 44;
     }
     
-    // Cell auch für den searchResultsTableView registrieren und damit den gleichen Prototypen für die Suche verwenden
     UITableView *searchResultsTableView = self.searchDisplayController.searchResultsTableView;
-    [searchResultsTableView registerClass:[TableViewCell class] forCellReuseIdentifier:@"Cell"];
+    // Hmpf. Nette Idee, aber leider Quatsch, weil das Layout selbst ja im Storyboard steckt, und nicht
+    // in der Klasse - also dann doch self.tableView bei dequeueReusableCellWithIdentifier nutzen...
+//    // Cell auch für den searchResultsTableView registrieren und damit den gleichen Prototypen für die Suche verwenden
+//    [searchResultsTableView registerClass:[TableViewCell class] forCellReuseIdentifier:@"Cell"];
     searchResultsTableView.estimatedRowHeight = self.tableView.estimatedRowHeight;
+    searchResultsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     // ein paar Objekte erstellen, damit schön was angezeigt werden kann
     self.objects = [[NSMutableArray alloc] init];
@@ -48,6 +52,7 @@
                                  initWithTitle:[NSString stringWithFormat:@"Ereignis %i", i]
                                  andDate:[NSDate dateWithTimeIntervalSinceNow:i*100000]]];
     }
+    self.filteredObjects = [NSMutableArray arrayWithCapacity:[self.objects count]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -74,9 +79,15 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        DetailObject *object = self.objects[indexPath.row];
-        [[segue destinationViewController] setDetailItem:object];
+        if (self.searchDisplayController.active) {
+            NSIndexPath *indexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
+            DetailObject *object = self.filteredObjects[indexPath.row];
+            [[segue destinationViewController] setDetailItem:object];
+        } else {
+            NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+            DetailObject *object = self.objects[indexPath.row];
+            [[segue destinationViewController] setDetailItem:object];
+        }
     }
 }
 
@@ -87,22 +98,28 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        return self.filteredObjects.count;
+    }
     return self.objects.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    TableViewCell *cell = (TableViewCell *) [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-
-    [self configureCell:cell atIndexPath:indexPath];
-    
+    TableViewCell *cell = (TableViewCell *) [self.tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    [self configureCell:cell forTableView:tableView atIndexPath:indexPath];
     return cell;
 }
 
-- (void) configureCell:(TableViewCell *) aCell atIndexPath:(NSIndexPath *) aIndexPath
-{
-    DetailObject *object = self.objects[aIndexPath.row];
-    aCell.leftLabel.text = [object.date description];
-    aCell.rightLabel.text = object.title;
+- (void) configureCell:(TableViewCell *)cell forTableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath {
+    DetailObject *object;
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        object = self.filteredObjects[indexPath.row];
+    } else {
+        object = self.objects[indexPath.row];
+    }
+    NSLog(@"configureCell %@", object);
+    cell.leftLabel.text = [object.date description];
+    cell.rightLabel.text = object.title;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -135,7 +152,7 @@
         sizingCell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell"];
     });
     
-    [self configureCell:sizingCell atIndexPath:indexPath];
+    [self configureCell:sizingCell forTableView:tableView atIndexPath:indexPath];
     CGFloat height = [self calculateHeightForConfiguredSizingCell:sizingCell];
     NSLog(@"heightForRowAtIndexPath %f", height);
     return height;
@@ -147,6 +164,20 @@
     
     CGSize size = [sizingCell.contentView systemLayoutSizeFittingSize:UILayoutFittingExpandedSize];
     return size.height;
+}
+
+#pragma mark - Filtering
+
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
+    [self filterContentForSearchText:searchString];
+    return YES;
+}
+
+-(void)filterContentForSearchText:(NSString*)searchText {
+    [self.filteredObjects removeAllObjects];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.title contains[c] %@",searchText];
+    self.filteredObjects = [NSMutableArray arrayWithArray:[self.objects filteredArrayUsingPredicate:predicate]];
+    NSLog(@"filteredObjects: %i", self.filteredObjects.count);
 }
 
 @end
