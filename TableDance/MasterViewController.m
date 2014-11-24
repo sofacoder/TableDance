@@ -29,6 +29,8 @@
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
     
+    self.tableView.estimatedRowHeight = 44;
+    
     NSLog(@"%f", UITableViewAutomaticDimension);
     NSLog(@"%f", self.tableView.rowHeight);
 }
