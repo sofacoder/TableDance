@@ -128,7 +128,9 @@
     });
     
     [self configureCell:sizingCell atIndexPath:indexPath];
-    return [self calculateHeightForConfiguredSizingCell:sizingCell];
+    CGFloat height = [self calculateHeightForConfiguredSizingCell:sizingCell];
+    NSLog(@"heightForRowAtIndexPath %f", height);
+    return height;
 }
 
 - (CGFloat)calculateHeightForConfiguredSizingCell:(UITableViewCell *)sizingCell {
