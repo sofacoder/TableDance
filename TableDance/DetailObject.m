@@ -29,4 +29,8 @@
     return self;
 }
 
+- (NSString *) description {
+    return [NSString stringWithFormat:@"title '%@', date '%@'", self.title, [self.date description]];
+}
+
 @end
