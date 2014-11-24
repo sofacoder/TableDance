@@ -20,7 +20,7 @@
 
 - (void) setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
     [super setHighlighted:highlighted animated:animated];
-    NSLog(@"setHighlighted %i", highlighted);
+
     if (highlighted) {
         self.leftBackground.backgroundColor = highlightColor;
         // den Hintergrund einen Punkt "zu hoch" beginnen und eine Punkt "zu tief" aufhören lassen
@@ -37,7 +37,6 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
-    NSLog(@"setSelected %i", selected);
     if (selected) {
         [self leftBackground].backgroundColor = highlightColor;
     } else {
