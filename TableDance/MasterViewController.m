@@ -30,7 +30,11 @@
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
     
-    self.tableView.estimatedRowHeight = 44;
+    // falsche Schätzungen führen unter iOS 8 zu sprüngen der Auswahl, wenn die Tabelle ein Stück gescrollt wurde!
+    // also keine Vorgabe für iOS 8 - mal immer in der Annahme, dass man die Angabe eben schätzt, und nicht weiß
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+        self.tableView.estimatedRowHeight = 44;
+    }
     
     // Cell auch für den searchResultsTableView registrieren und damit den gleichen Prototypen für die Suche verwenden
     UITableView *searchResultsTableView = self.searchDisplayController.searchResultsTableView;
