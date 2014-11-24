@@ -31,6 +31,11 @@
     
     self.tableView.estimatedRowHeight = 44;
     
+    // Cell auch für den searchResultsTableView registrieren und damit den gleichen Prototypen für die Suche verwenden
+    UITableView *searchResultsTableView = self.searchDisplayController.searchResultsTableView;
+    [searchResultsTableView registerClass:[TableViewCell class] forCellReuseIdentifier:@"Cell"];
+    searchResultsTableView.estimatedRowHeight = self.tableView.estimatedRowHeight;
+    
     // ein paar Objekte erstellen, damit schön was angezeigt werden kann
     self.objects = [[NSMutableArray alloc] init];
     for (int i=0; i < 100; i++) {
